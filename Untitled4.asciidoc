@@ -1,0 +1,126 @@
++*In[28]:*+
+[source, ipython3]
+----
+import numpy as np
+atoi=np.array([['a','b','c'],['d','e','f'],['g','h','i']])
+print(atoi)
+#Extract Diagonal
+np.diag(atoi)
+#Extract Diagonal and Make it Lowercase
+diagonal=np.diag(atoi)
+converted_list = [x.upper() for x in diagonal]
+print(converted_list)
+
+----
+
+
++*Out[28]:*+
+----
+[['a' 'b' 'c']
+ ['d' 'e' 'f']
+ ['g' 'h' 'i']]
+['A', 'E', 'I']
+----
+
+
++*In[3]:*+
+[source, ipython3]
+----
+import numpy as np
+atoi=np.array([['a','b','c'],['d','e','f'],['g','h','i']])
+print(atoi)
+#Extract Diagonal
+diagonal=np.diag(atoi)
+print(diagonal)
+#Extract Diagonal and Make it Lowercase
+diagonal=np.diag(atoi)
+converted_list = [x.upper() for x in diagonal]
+print(converted_list)
+----
+
+
++*Out[3]:*+
+----
+[['a' 'b' 'c']
+ ['d' 'e' 'f']
+ ['g' 'h' 'i']]
+['a' 'e' 'i']
+['A', 'E', 'I']
+----
+
+
++*In[4]:*+
+[source, ipython3]
+----
+import numpy as np
+atoi=np.array([['a','b','c'],['d','e','f'],['g','h','i']])
+print(atoi)
+#Extract Diagonal
+diagonal=np.diag(atoi)
+print(diagonal)
+#Extract Diagonal and Make it Uppercase
+diagonal=np.diag(atoi)
+converted_list = [x.upper() for x in diagonal]
+print(converted_list)
+----
+
+
++*Out[4]:*+
+----
+[['a' 'b' 'c']
+ ['d' 'e' 'f']
+ ['g' 'h' 'i']]
+['a' 'e' 'i']
+['A', 'E', 'I']
+----
+
+
++*In[5]:*+
+[source, ipython3]
+----
+0.1 + 0.1 + 0.1
+----
+
+
++*Out[5]:*+
+----0.30000000000000004----
+
+
++*In[16]:*+
+[source, ipython3]
+----
+num=str(3**1000000)
+print(len(num))
+----
+
+
++*Out[16]:*+
+----
+477122
+----
+
+
++*In[18]:*+
+[source, ipython3]
+----
+preferred_food=("coconut","blueberries","plantain")
+print(preferred_food)
+----
+
+
++*Out[18]:*+
+----
+('coconut', 'blueberries', 'plantain')
+----
+
+
++*In[23]:*+
+[source, ipython3]
+----
+import random as rd
+rd
+----
+
+
++*Out[23]:*+
+----<module 'random' from '/Users/jhaelle/opt/anaconda3/lib/python3.8/random.py'>----
