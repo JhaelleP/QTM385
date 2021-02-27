@@ -1,0 +1,235 @@
+== QTM 385
+
+'''''
+
+== Homework 3
+
+Student: 2297846
+
+In this homework, we will do some very elementary text analysis. The
+idea is to:
+
+[arabic]
+. Open a Gutenberg Project Book
+. Count how many lines the Book has.
+. Count how many words the Book has.
+
+The https://www.gutenberg.org[Project Gutenberg] stores thousands of
+texts that are free for access, download, and read in your own device.
+In this homework, we will read the book ``Pride and Prejudice,'' by Jane
+Austen. In case you want to know more about the book, here is a
+https://en.wikipedia.org/wiki/Pride_and_Prejudice[Wikipedia entry]
+describing it.
+
+'''''
+
+== Question 1
+
+We start by opening the book. The `txt` version of the book is in the
+following link: https://www.gutenberg.org/files/1342/1342-0.txt
+
+To read the text from this URL we will use the function `urlopen` in the
+module `urllib.request`. Read this
+https://stackoverflow.com/questions/47842388/read-text-files-from-website-with-python[Stackoverflow
+entry], and adapt the code in the first answer to _open the book_,
+_display the first line_, and then _`break`_.
+
+
++*In[125]:*+
+[source, ipython3]
+----
+import urllib.request
+
+data = urllib.request.urlopen("https://www.gutenberg.org/files/1342/1342-0.txt")
+
+for line in data:
+    print('The first line is:',line)
+    break
+----
+
+
++*Out[125]:*+
+----
+The first line is: b'\xef\xbb\xbfThe Project Gutenberg eBook of Pride and Prejudice, by Jane Austen\r\n'
+----
+
+'''''
+
+== Question 2
+
+Note that at the beginning and the end of the first line, we have some
+strange characters (e. g. `\xef\xbb\xbf`). This happens because of the
+https://en.wikipedia.org/wiki/Character_encoding[character encoding]. To
+fix this, we need to use `decode('utf-8')`. For instance, check out the
+following code:
+
+
++*In[8]:*+
+[source, ipython3]
+----
+# Here is my first line
+my_line = b'\xef\xbb\xbfThe Project Gutenberg eBook of Pride and Prejudice, by Jane Austen\r\n'
+
+# My line before decoding
+print(my_line, end = '\n\n')
+
+# My line after decoding
+print(my_line.decode('utf-8'))
+----
+
+
++*Out[8]:*+
+----
+b'\xef\xbb\xbfThe Project Gutenberg eBook of Pride and Prejudice, by Jane Austen\r\n'
+
+﻿The Project Gutenberg eBook of Pride and Prejudice, by Jane Austen
+
+----
+
+To fix this problem, we will create a list with all the lines in the
+book, decoded to use the UTF-8 encoding. Your job, step by step, is to:
+
+[arabic]
+. Reopen the book
+. Create an empty list
+. Use an for-loop to go over each line of the text
+. Inside the for-loop, change the encoding of line, and store in the
+list (hint: you could use `append()` to do this)
+
+In the end, display the first line.
+
+
++*In[118]:*+
+[source, ipython3]
+----
+import urllib.request
+
+data = urllib.request.urlopen("https://www.gutenberg.org/files/1342/1342-0.txt")
+
+a=list()
+
+for line in data:
+
+ a = (line.decode('utf-8'))
+ print('The first line is: ',a)
+ break
+
+
+----
+
+
++*Out[118]:*+
+----
+﻿The Project Gutenberg eBook of Pride and Prejudice, by Jane Austen
+
+----
+
+'''''
+
+== Question 3
+
+How many lines the book has?
+
+
++*In[122]:*+
+[source, ipython3]
+----
+import urllib.request
+
+number_of_lines = len(urllib.request.urlopen("https://www.gutenberg.org/files/1342/1342-0.txt").readlines(  ))
+print('This book has:', number_of_lines, "lines")
+
+----
+
+
++*Out[122]:*+
+----
+This book has: 14580 lines
+----
+
+'''''
+
+== Question 4
+
+Now, to count how many words there is in the book, we need a function
+that splits a text line into its words. For example, to split the first
+line:
+
+
++*In[119]:*+
+[source, ipython3]
+----
+# New decoded line:
+my_first_line = "The Project Gutenberg eBook of Pride and Prejudice, by Jane Austen"
+
+# My splitted line
+print(my_first_line.split())
+----
+
+
++*Out[119]:*+
+----
+['The', 'Project', 'Gutenberg', 'eBook', 'of', 'Pride', 'and', 'Prejudice,', 'by', 'Jane', 'Austen']
+----
+
+Split the 385th line of the text, and show how many words it has (hint:
+python starts counting at zero):
+
+
++*In[124]:*+
+[source, ipython3]
+----
+import urllib.request
+
+line384= urllib.request.urlopen("https://www.gutenberg.org/files/1342/1342-0.txt").readlines(384)
+
+a=list()
+
+for line in line384:
+
+ a = (line.decode('utf-8'))
+
+print('385th line of the text:', a)
+
+test_string= a
+count = str(len(test_string.split()))
+print('Amount of words in 385th line of the text:',count)
+
+
+----
+
+
++*Out[124]:*+
+----
+385th line of the text: www.gutenberg.org. If you are not located in the United States, you
+
+Amount of words in 385th line of the text: 11
+----
+
+'''''
+
+== Question 5
+
+Now, count how many words the book has.
+
+
++*In[85]:*+
+[source, ipython3]
+----
+import urllib.request
+
+data = urllib.request.urlopen("https://www.gutenberg.org/files/1342/1342-0.txt")
+data = data.read()
+words = data.split()
+
+print('Number of words in Pride and Prejudice :', len(words))
+
+----
+
+
++*Out[85]:*+
+----
+Number of words in Pride and Prejudice : 124743
+----
+
+*That’s all, folks!*
