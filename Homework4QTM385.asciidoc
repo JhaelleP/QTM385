@@ -1,0 +1,396 @@
+== QTM 385
+
+'''''
+
+== Homework 4
+
+Student: 2297846
+
+In this homework, we will create an object called Student, that is
+useful for a professor to store information about a student.
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+#When I tried to execute my code using the homework's format I received a lot of errors, however when my whole code is in one cell it works. Therefore, I pasted my code in one cell at the bottom and in the homework's format
+----
+
+'''''
+
+== Question 1
+
+Create a class Student, that has:
+
+[arabic, start=0]
+. Id number (5-digits integer, starting with 1)
+. First Name (str)
+. Last Name (str)
+. Grades (list of floats)
+. Credits (list of integers)
+. Major (str)
+
+Provide a constructor for your class and create one fictitious student.
+
+
++*In[3]:*+
+[source, ipython3]
+----
+class Student:
+    def __init__(self,ID,firstname,lastname,grades,credits,major):
+        self.ID=ID
+        self.firstname=firstname
+        self.lastname=lastname
+        self.grades=grades
+        self.credits=credits
+        self.major=major
+        
+Jelli=Student(21345, "Jelli", "Po", (90,93,98), (3,4,3), "Math" )
+Jell=Student(22345, "Jell", "Poy", (90,93,98,98), (3,4,3,3,1), "Statistics" )
+----
+
+'''''
+
+== Question 2
+
+Create a method to nicely display the student when we type `print`. It
+should display, for example:
+
+....
+Student:
+    Id: 12345
+    Name: Mig, Umberto
+    Major: QSS
+....
+
+Create a method that, when a variable storing a student is typed in the
+console, displays:
+
+....
+Student(Mig, Umberto; 12345)
+....
+
+Provide some testing with a fictitious result of your choice.
+
+
++*In[4]:*+
+[source, ipython3]
+----
+ def printStudent(self):
+  action=str(input("Type Action Here: "))
+  if action=="print":
+   print("""
+   Student: """, 
+   """ 
+   ID: """, self.ID, 
+   """
+   Name: """, self.lastname, ",", self.firstname,
+   """
+   Major: """, self.major) 
+  else: 
+   print("Please Type The Word print To Print Out Student Information")
+ 
+ def StoringAStudent(self):
+  print("Student(", self.lastname, ",", self.firstname, ";",self.ID,")")
+
+
+Jelli=Student(12345, "Jelli", "Po", 90, 97, "Math" )
+Jell=Student(22345, "Jell", "Poy", (90,93,98,98), (3,4,3,3,1), "Statistics" )
+Jelli.printStudent()
+Jelli.StoringAStudent()
+Jell.printStudent()
+Jell.StoringAStudent()
+----
+
+
++*Out[4]:*+
+----
+
+    ---------------------------------------------------------------------------
+
+    AttributeError                            Traceback (most recent call last)
+
+    <ipython-input-4-371f26305451> in <module>
+         19 Jelli=Student(12345, "Jelli", "Po", 90, 97, "Math" )
+         20 Jell=Student(22345, "Jell", "Poy", (90,93,98,98), (3,4,3,3,1), "Statistics" )
+    ---> 21 Jelli.printStudent()
+         22 Jelli.StoringAStudent()
+         23 Jell.printStudent()
+
+
+    AttributeError: 'Student' object has no attribute 'printStudent'
+
+----
+
+'''''
+
+== Question 3
+
+Implement class methods for:
+
+[arabic]
+. Check if the id number is valid (remember: 5 digits, starting with
+number one)
+. Check if the grades list has the same length as the credits list. The
+idea is that every grade corresponds to a course that gave the student a
+certain amount of credits.
+. Append grade and credit: given a grade, and credits attached to the
+grade, append both to each respective place.
+
+Test your function with a toy student of your choice.
+
+
++*In[9]:*+
+[source, ipython3]
+----
+ def IDcheck(self):
+  self.ID=str(self.ID)
+  if self.ID[0]!="1":
+   print("Student ID Is Not Valid")
+  elif (len(self.ID))!=5: 
+   print("Student ID Is Not Valid")
+  else:
+    print("Student ID Is Valid")
+    
+ def GradeEqualCredits(self):
+  if (len(self.grades))==(len(self.credits)):
+   print("Every grade corresponds to a course that gave the student a certain amount of credits.")
+  else: 
+   print("Not every grade corresponds to a course that gave the student a certain amount of credits.")
+ 
+ def Append(self):
+  GradeCredit=[]
+  if (len(self.grades))==(len(self.credits)):
+   GradeCredit=self.grades+self.credits  
+   print(GradeCredit)
+  else:
+   print("Grades and credits can not be appended because not every grade corresponds to a course that gave the student a certain amount of credits.")
+ 
+Jelli=Student(21345, "Jelli", "Po", (90,93,98), (3,4,3), "Math" )
+Jell=Student(22345, "Jell", "Poy", (90,93,98,98), (3,4,3,3,1), "Statistics" )
+Jelli.IDcheck()
+Jelli.GradeEqualCredits()
+Jelli.Append()
+Jell.IDcheck()
+Jell.GradeEqualCredits()
+Jell.Append()
+----
+
+
++*Out[9]:*+
+----
+
+    ---------------------------------------------------------------------------
+
+    AttributeError                            Traceback (most recent call last)
+
+    <ipython-input-9-d584dccc1a52> in <module>
+         24 Jelli=Student(21345, "Jelli", "Po", (90,93,98), (3,4,3), "Math" )
+         25 Jell=Student(22345, "Jell", "Poy", (90,93,98,98), (3,4,3,3,1), "Statistics" )
+    ---> 26 Jelli.IDcheck()
+         27 Jelli.GradeEqualCredits()
+         28 Jelli.Append()
+
+
+    AttributeError: 'Student' object has no attribute 'IDcheck'
+
+----
+
+'''''
+
+== Question 4
+
+Create a module in the class Student that computes the unweighted
+average of the student’s grades.
+
+
++*In[10]:*+
+[source, ipython3]
+----
+ def UnweightedAvg(self):
+  avg=(sum(self.grades))/(len(self.grades))
+  print("Unweighted Average: ", avg)
+
+Jelli=Student(21345, "Jelli", "Po", (90,93,98), (3,4,3), "Math" )
+Jell=Student(22345, "Jell", "Poy", (90,93,98,98), (3,4,3,3,1), "Statistics" )
+Jelli.UnweightedAvg() 
+Jell.UnweightedAvg() 
+----
+
+
++*Out[10]:*+
+----
+
+    ---------------------------------------------------------------------------
+
+    AttributeError                            Traceback (most recent call last)
+
+    <ipython-input-10-a2545dc00eba> in <module>
+          5 Jelli=Student(21345, "Jelli", "Po", (90,93,98), (3,4,3), "Math" )
+          6 Jell=Student(22345, "Jell", "Poy", (90,93,98,98), (3,4,3,3,1), "Statistics" )
+    ----> 7 Jelli.UnweightedAvg()
+          8 Jell.UnweightedAvg()
+
+
+    AttributeError: 'Student' object has no attribute 'UnweightedAvg'
+
+----
+
+'''''
+
+== Question 5
+
+Create a module in the class Student that computes the weighted average
+of the student’s grades, weighted by the credits.
+
+
++*In[11]:*+
+[source, ipython3]
+----
+from operator import mul 
+
+def WeightedAvg(self):
+  if (len(self.grades))==(len(self.credits)):
+   wavg=(sum(tuple(map(mul,self.grades,self.credits))))/(sum(self.credits))
+   print("Weighted Average: ", wavg)
+  else:
+   print("Weighted average can not be calculated because not every grade corresponds to a course that gave the student a certain amount of credits.")
+
+Jelli=Student(21345, "Jelli", "Po", (90,93,98,98), (3,4,3,3), "Math" )
+Jell=Student(22345, "Jell", "Poy", (90,93,98,98), (3,4,3,3,1), "Statistics" )
+Jelli.WeightedAvg() 
+Jell.WeightedAvg() 
+----
+
+
++*Out[11]:*+
+----
+
+    ---------------------------------------------------------------------------
+
+    AttributeError                            Traceback (most recent call last)
+
+    <ipython-input-11-480c75f5a261> in <module>
+         10 Jelli=Student(21345, "Jelli", "Po", (90,93,98,98), (3,4,3,3), "Math" )
+         11 Jell=Student(22345, "Jell", "Poy", (90,93,98,98), (3,4,3,3,1), "Statistics" )
+    ---> 12 Jelli.WeightedAvg()
+         13 Jell.WeightedAvg()
+
+
+    AttributeError: 'Student' object has no attribute 'WeightedAvg'
+
+----
+
+
++*In[12]:*+
+[source, ipython3]
+----
+#Full Code In One Cell
+
+from operator import mul 
+
+class Student:
+ def __init__(self,ID,firstname,lastname,grades,credits,major):
+  self.ID=ID
+  self.firstname=firstname
+  self.lastname=lastname
+  self.grades=grades
+  self.credits=credits
+  self.major=major
+
+ def printStudent(self):
+  action=str(input("Type Action Here: "))
+  if action=="print":
+   print("""
+   Student: """, 
+   """ 
+   ID: """, self.ID, 
+   """
+   Name: """, self.lastname, ",", self.firstname,
+   """
+   Major: """, self.major) 
+  else: 
+   print("Please Type The Word print To Print Out Student Information")
+ 
+ def StoringAStudent(self):
+  print("Student(", self.lastname, ",", self.firstname, ";",self.ID,")")
+ 
+ def IDcheck(self):
+  self.ID=str(self.ID)
+  if self.ID[0]!="1":
+   print("Student ID Is Not Valid")
+  elif (len(self.ID))!=5: 
+   print("Student ID Is Not Valid")
+  else:
+    print("Student ID Is Valid")
+    
+ def GradeEqualCredits(self):
+  if (len(self.grades))==(len(self.credits)):
+   print("Every grade corresponds to a course that gave the student a certain amount of credits.")
+  else: 
+   print("Not every grade corresponds to a course that gave the student a certain amount of credits.")
+ 
+ def Append(self):
+  GradeCredit=[]
+  if (len(self.grades))==(len(self.credits)):
+   GradeCredit=self.grades+self.credits  
+   print(GradeCredit)
+  else:
+   print("Grades and credits can not be appended because not every grade corresponds to a course that gave the student a certain amount of credits.")
+ 
+ def UnweightedAvg(self):
+  avg=(sum(self.grades))/(len(self.grades))
+  print("Unweighted Average: ", avg)
+
+ def WeightedAvg(self):
+  if (len(self.grades))==(len(self.credits)):
+   wavg=(sum(tuple(map(mul,self.grades,self.credits))))/(sum(self.credits))
+   print("Weighted Average: ", wavg)
+  else:
+   print("Weighted average can not be calculated because not every grade corresponds to a course that gave the student a certain amount of credits.")
+
+Jelli=Student(12345, "Jelli", "Po", (90,93,98,98), (3,4,3,3), "Math" )
+Jelli.printStudent()
+Jelli.StoringAStudent()
+Jelli.IDcheck()
+Jelli.GradeEqualCredits()
+Jelli.Append()
+Jelli.UnweightedAvg() 
+Jelli.WeightedAvg() 
+
+Jell=Student(22345, "Jell", "Poy", (90,93,98,98), (3,4,3,3,1), "Statistics" )
+Jell.printStudent()
+Jell.StoringAStudent()
+Jell.IDcheck()
+Jell.GradeEqualCredits()
+Jell.Append()
+Jell.UnweightedAvg() 
+Jell.WeightedAvg() 
+----
+
+
++*Out[12]:*+
+----
+Type Action Here: p
+Please Type The Word print To Print Out Student Information
+Student( Po , Jelli ; 12345 )
+Student ID Is Valid
+Every grade corresponds to a course that gave the student a certain amount of credits.
+(90, 93, 98, 98, 3, 4, 3, 3)
+Unweighted Average:  94.75
+Weighted Average:  94.61538461538461
+Type Action Here: print
+
+   Student:   
+   ID:  22345 
+   Name:  Poy , Jell 
+   Major:  Statistics
+Student( Poy , Jell ; 22345 )
+Student ID Is Not Valid
+Not every grade corresponds to a course that gave the student a certain amount of credits.
+Grades and credits can not be appended because not every grade corresponds to a course that gave the student a certain amount of credits.
+Unweighted Average:  94.75
+Weighted average can not be calculated because not every grade corresponds to a course that gave the student a certain amount of credits.
+----
+
+*That’s all, folks!*
